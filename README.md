@@ -1,2 +1,18 @@
-# oracle-past-participle
-The Oracle of the Past Participle es una Aplicación web interactiva que consiste en un divertido duelo gramatical para dos jugadores donde compiten por dominar el Past Participle en inglés y alcanzar primero los 10 puntos, convirtiéndose en el campeón del oráculo.
+# The Oracle of the Past Participle
+
+A two-player educational web game designed to help students practice English past participles through a fun and competitive challenge.
+
+## Features
+- Two-player mode
+- Score tracking
+- Interactive feedback
+- Past participle practice
+- Responsive design for desktop and mobile devices
+
+## Technologies
+- HTML5
+- CSS3
+- JavaScript
+
+## Goal
+Be the first player to reach 10 correct answers and become the Oracle Champion.
