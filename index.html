@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Oracle of the Past Participle</title>
+  <style>
+    /* aquí va el contenido de styles.css */
+
+    /* ══════════════════════════════════════════════════════
+   THE ORACLE OF THE PAST PARTICIPLE — styles.css
+   Color palette from: coolors.co/001219-005f73-...
+   ══════════════════════════════════════════════════════ */
+
+/* ── CSS Custom Properties (color palette) ── */
+:root {
+  --deep:    #001219;
+  --navy:    #005F73;
+  --teal:    #0A9396;
+  --mint:    #94D2BD;
+  --sand:    #E9D8A6;
+  --amber:   #EE9B00;
+  --burnt:   #CA6702;
+  --terra:   #BB3E03;
+  --crimson: #AE2012;
+  --ruby:    #9B2226;
+}
+
+/* ── Reset ── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Base ── */
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--deep);
+  color: var(--sand);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ══════════════════════════════════════════════════════
+   SCREENS
+   ══════════════════════════════════════════════════════ */
+.screen {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* ══════════════════════════════════════════════════════
+   SETUP SCREEN
+   ══════════════════════════════════════════════════════ */
+#setup {
+  background: linear-gradient(160deg, var(--deep) 0%, #002233 100%);
+}
+
+.setup-box {
+  background: rgba(0, 95, 115, 0.18);
+  border: 1px solid rgba(10, 147, 150, 0.3);
+  border-radius: 20px;
+  padding: 48px 52px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--mint);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.title-main {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--sand);
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--mint);
+  font-style: italic;
+  margin-bottom: 36px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.field-group {
+  text-align: left;
+}
+
+.field-group label {
+  font-size: 12px;
+  color: var(--mint);
+  font-weight: 600;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 7px;
+}
+
+.field-group input {
+  width: 100%;
+  background: rgba(0, 18, 25, 0.7);
+  border: 2px solid var(--teal);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--sand);
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.field-group input:focus {
+  border-color: var(--amber);
+}
+
+/* ══════════════════════════════════════════════════════
+   SHARED BUTTON STYLES
+   ══════════════════════════════════════════════════════ */
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 13px 32px;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-amber   { background: var(--amber);    color: var(--deep); }
+.btn-teal    { background: var(--teal);     color: var(--deep); }
+.btn-outline { background: transparent; border: 2px solid var(--teal); color: var(--mint); }
+
+/* ══════════════════════════════════════════════════════
+   GAME SCREEN
+   ══════════════════════════════════════════════════════ */
+#game {
+  background: linear-gradient(160deg, var(--deep) 0%, #001a22 100%);
+  flex-direction: column;
+  gap: 0;
+  padding: 16px;
+}
+
+/* Header */
+.game-header {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.game-header span {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--teal);
+}
+
+/* ── Score cards ── */
+.scores-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  max-width: 580px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.score-card {
+  background: var(--navy);
+  border-radius: 14px;
+  padding: 14px 18px;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.score-card.active {
+  background: var(--teal);
+  border-color: var(--mint);
+}
+
+.score-card .player-name {
+  font-size: 13px;
+  color: var(--mint);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.score-card.active .player-name { color: var(--deep); }
+
+.score-card .score-num {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--sand);
+  line-height: 1;
+}
+
+.score-card.active .score-num { color: var(--deep); }
+
+/* Pip dots */
+.score-card .pip-row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(148, 210, 189, 0.25);
+  transition: background 0.3s;
+}
+
+.pip.filled                     { background: var(--amber); }
+.score-card.active .pip         { background: rgba(0, 18, 25, 0.2); }
+.score-card.active .pip.filled  { background: var(--deep); }
+
+/* Progress bar */
+.progress-bar-wrap {
+  width: 100%;
+  background: rgba(148, 210, 189, 0.1);
+  border-radius: 99px;
+  height: 5px;
+  margin-top: 10px;
+}
+
+.progress-bar-fill {
+  height: 5px;
+  border-radius: 99px;
+  background: var(--amber);
+  transition: width 0.4s ease;
+}
+
+/* ── Main game card ── */
+.game-card {
+  background: rgba(0, 95, 115, 0.15);
+  border: 1px solid rgba(10, 147, 150, 0.25);
+  border-radius: 20px;
+  padding: 28px 36px;
+  max-width: 580px;
+  width: 100%;
+  text-align: center;
+}
+
+.turn-badge {
+  display: inline-block;
+  background: rgba(238, 155, 0, 0.15);
+  border: 1px solid rgba(238, 155, 0, 0.4);
+  color: var(--amber);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 14px;
+}
+
+.verb-label {
+  font-size: 12px;
+  color: var(--mint);
+  margin-bottom: 8px;
+}
+
+.verb-display {
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--sand);
+  min-height: 70px;
+  line-height: 1.1;
+  margin-bottom: 18px;
+  letter-spacing: -1px;
+}
+
+.verb-display.flash {
+  animation: flash 0.35s ease;
+}
+
+@keyframes flash {
+  0%   { opacity: 0; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.answer-label {
+  font-size: 12px;
+  color: var(--mint);
+  margin-bottom: 8px;
+}
+
+.answer-input {
+  width: 100%;
+  background: rgba(0, 18, 25, 0.7);
+  border: 2px solid var(--teal);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: var(--sand);
+  font-size: 20px;
+  font-family: inherit;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.answer-input:focus   { border-color: var(--amber); }
+.answer-input:disabled { opacity: 0.45; }
+
+.answer-input.shake {
+  animation: shake 0.4s ease;
+  border-color: var(--crimson) !important;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-8px); }
+  40%      { transform: translateX(8px); }
+  60%      { transform: translateX(-5px); }
+  80%      { transform: translateX(5px); }
+}
+
+/* ══════════════════════════════════════════════════════
+   FEEDBACK PANEL
+   ══════════════════════════════════════════════════════ */
+.feedback-panel {
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 4px;
+  transition: all 0.3s;
+}
+
+.feedback-panel.hidden {
+  display: none;
+}
+
+/* Correct state */
+.feedback-panel.correct {
+  background: rgba(10, 147, 150, 0.12);
+  border: 1px solid rgba(10, 147, 150, 0.4);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: fadeSlide 0.3s ease;
+}
+
+.feedback-panel.correct .fb-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.feedback-panel.correct .fb-text {
+  font-size: 14px;
+  color: var(--mint);
+  font-weight: 600;
+  text-align: left;
+}
+
+.feedback-panel.correct .fb-word {
+  color: var(--sand);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* Wrong state */
+.feedback-panel.wrong {
+  background: rgba(174, 32, 18, 0.1);
+  border: 1px solid rgba(174, 32, 18, 0.35);
+  padding: 16px 20px;
+  animation: fadeSlide 0.3s ease;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Wrong header */
+.fb-wrong-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.fb-wrong-header .fb-icon { font-size: 18px; }
+
+.fb-wrong-header span {
+  font-size: 13px;
+  color: var(--terra);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Comparison rows */
+.comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comp-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comp-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  min-width: 64px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.comp-label.your  { color: var(--crimson); }
+.comp-label.right { color: var(--mint); }
+
+/* Letter boxes */
+.letter-row {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 34px;
+  border-radius: 7px;
+  font-size: 17px;
+  font-weight: 700;
+  font-family: 'Segoe UI', monospace;
+}
+
+/* Your answer letter states */
+.letter.ok   { background: rgba(10, 147, 150, 0.18); color: var(--mint);   border: 1px solid rgba(10, 147, 150, 0.4); }
+.letter.bad  { background: rgba(174, 32, 18, 0.25);  color: #ff8a80;       border: 1px solid rgba(174, 32, 18, 0.6);  }
+.letter.miss { background: rgba(238, 155, 0, 0.12);  color: var(--amber);  border: 1px solid rgba(238, 155, 0, 0.3); opacity: 0.5; }
+
+/* Correct answer letter states */
+.letter.ref-ok  { background: rgba(10, 147, 150, 0.12); color: var(--mint); border: 1px solid rgba(10, 147, 150, 0.3); }
+.letter.ref-fix { background: rgba(148, 210, 189, 0.2); color: var(--sand); border: 1px solid var(--mint); font-weight: 900; }
+
+.divider {
+  height: 1px;
+  background: rgba(174, 32, 18, 0.2);
+  margin: 10px 0;
+}
+
+.fb-tip {
+  margin-top: 12px;
+  font-size: 12px;
+  color: rgba(148, 210, 189, 0.7);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Button row & counter */
+.btn-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.counter {
+  font-size: 11px;
+  color: rgba(148, 210, 189, 0.5);
+  margin-top: 10px;
+}
+
+/* ══════════════════════════════════════════════════════
+   WIN SCREEN
+   ══════════════════════════════════════════════════════ */
+#win {
+  background: linear-gradient(160deg, var(--deep) 0%, var(--ruby) 100%);
+}
+
+.win-box {
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+}
+
+.trophy {
+  font-size: 72px;
+  margin-bottom: 10px;
+  animation: bounce 1s ease infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-10px); }
+}
+
+.win-caption {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--sand);
+  margin-bottom: 8px;
+}
+
+.win-name {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--amber);
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.win-sub {
+  font-size: 15px;
+  color: var(--mint);
+  margin-bottom: 32px;
+}
+
+.win-scores {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.win-score-box {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 16px 28px;
+  text-align: center;
+}
+
+.win-score-box .ws-name {
+  font-size: 13px;
+  color: var(--mint);
+  margin-bottom: 4px;
+}
+
+.win-score-box .ws-num {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--sand);
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE — Mobile
+   ══════════════════════════════════════════════════════ */
+@media (max-width: 500px) {
+  .setup-box        { padding: 32px 24px; }
+  .field-row        { grid-template-columns: 1fr; }
+  .title-main       { font-size: 24px; }
+  .verb-display     { font-size: 38px; }
+  .game-card        { padding: 20px 16px; }
+  .letter           { width: 26px; height: 30px; font-size: 15px; }
+  .comp-label       { min-width: 52px; font-size: 9px; }
+}
+  </style>
+</head>
+<body>
+
+  
+
+  
+  <!-- ══════════════════════════════════════════
+       SETUP SCREEN
+  ══════════════════════════════════════════ -->
+  <div class="screen active" id="setup">
+    <div class="setup-box">
+      <p class="eyebrow">A grammar duel</p>
+      <h1 class="title-main">The Oracle of the<br>Past Participle</h1>
+      <p class="subtitle">First player to 10 correct answers wins</p>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label for="name1">PLAYER 1</label>
+          <input type="text" id="name1" placeholder="Player 1" maxlength="18" />
+        </div>
+        <div class="field-group">
+          <label for="name2">PLAYER 2</label>
+          <input type="text" id="name2" placeholder="Player 2" maxlength="18" />
+        </div>
+      </div>
+
+      <button class="btn btn-amber" onclick="startGame()">BEGIN THE DUEL</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       GAME SCREEN
+  ══════════════════════════════════════════ -->
+  <div class="screen" id="game">
+    <div class="game-header">
+      <span>⚬ THE ORACLE ⚬</span>
+    </div>
+
+    <!-- Score panels -->
+    <div class="scores-row">
+      <div class="score-card active" id="card1">
+        <div class="player-name" id="disp1">Player 1</div>
+        <div class="score-num"   id="score1">0</div>
+        <div class="pip-row"     id="pips1"></div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="bar1" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="score-card" id="card2">
+        <div class="player-name" id="disp2">Player 2</div>
+        <div class="score-num"   id="score2">0</div>
+        <div class="pip-row"     id="pips2"></div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="bar2" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main game card -->
+    <div class="game-card">
+      <div class="turn-badge" id="turnBadge">→ Player 1's turn</div>
+
+      <div class="verb-label">Base form</div>
+      <div class="verb-display" id="verbDisplay">—</div>
+
+      <div class="answer-label">Type the past participle and press Enter</div>
+      <input
+        class="answer-input"
+        type="text"
+        id="answerInput"
+        placeholder="past participle…"
+        disabled
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+      />
+
+      
+      <div class="feedback-panel hidden" id="feedbackPanel"></div>
+
+      <div class="btn-row">
+        <button class="btn btn-teal"  id="btnDraw"   onclick="drawVerb()">DRAW VERB</button>
+        <button class="btn btn-amber" id="btnSubmit" onclick="checkAnswer()" disabled>SUBMIT</button>
+      </div>
+
+      <div class="counter" id="counter">50 verbs remaining</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       WIN SCREEN
+  ══════════════════════════════════════════ -->
+  <div class="screen" id="win">
+    <div class="win-box">
+      <div class="trophy">🏆</div>
+      <p class="win-caption">THE DUEL IS OVER</p>
+      <div class="win-name" id="winnerName">—</div>
+      <p class="win-sub"    id="winSub">wins the duel!</p>
+
+      <div class="win-scores">
+        <div class="win-score-box">
+          <div class="ws-name" id="ws1name">P1</div>
+          <div class="ws-num"  id="ws1score">0</div>
+        </div>
+        <div class="win-score-box">
+          <div class="ws-name" id="ws2name">P2</div>
+          <div class="ws-num"  id="ws2score">0</div>
+        </div>
+      </div>
+
+      <button class="btn btn-outline" onclick="goSetup()">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <script>
+    /* aquí va el contenido de game.js */
+
+    /* ══════════════════════════════════════════════════════
+   THE ORACLE OF THE PAST PARTICIPLE — game.js
+   ══════════════════════════════════════════════════════ */
+
+/* ── Verb list: [base, past participle] ──────────────── */
+const VERBS = [
+  ["be",      "been"],
+  ["become",  "become"],
+  ["begin",   "begun"],  
+  ["break",   "broken"],
+  ["bring",   "brought"],
+  ["build",   "built"],
+  ["buy",     "bought"],
+  ["can",    "could"],
+  ["catch",   "caught"],
+  ["choose",  "chosen"],
+  ["come",    "come"],
+  ["cost",    "cost"],
+  ["cut",     "cut"],
+  ["do",      "done"],
+  ["draw",    "drawn"],
+  ["drink",   "drunk"],
+  ["drive",   "driven"],
+  ["eat",     "eaten"],
+  ["fall",    "fallen"],
+  ["feel",    "felt"],
+  ["find",    "found"],
+  ["fly",     "flown"],
+  ["forget",  "forgotten"],  
+  ["get",     "gotten"],
+  ["give",    "given"],
+  ["go",      "gone"],
+  ["grow",    "grown"],
+  ["have",    "had"],
+  ["hear",    "heard"],  
+  ["hit",    "hit"],
+  ["hurt",    "hurt"],
+  ["keep",    "kept"],
+  ["know",    "known"],  
+  ["leave",   "left"],
+  ["lend",    "lent"],  
+  ["lie",     "lain"],
+  ["lose",    "lost"],
+  ["make",    "made"],
+  ["mean",    "meant"],
+  ["meet",    "met"],
+  ["pay",     "paid"],
+  ["put",     "put"],
+  ["read",    "read"],
+  ["ride",    "ridden"],
+  ["ring", "rung"],
+  ["say",  "said"],
+  ["see",    "seen"],
+  ["sell",     "sold"],
+  ["teach",    "taught"],
+  ["wear",   "worn"],  
+];
+
+/* ── Game constants ──────────────────────────────────── */
+const WIN_SCORE = 10; // points needed to win
+
+/* ── Game state ──────────────────────────────────────── */
+let name1, name2;
+let score1, score2;
+let player1Turn;
+let verbPool;
+let currentVerb;
+
+/* ── Utility: get element by id ──────────────────────── */
+function $(id) {
+  return document.getElementById(id);
+}
+
+/* ── Show a screen, hide all others ──────────────────── */
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
+  $(id).classList.add("active");
+}
+
+/* ════════════════════════════════════════════════════════
+   GAME FLOW
+   ════════════════════════════════════════════════════════ */
+
+/** Called by the Setup screen's "BEGIN THE DUEL" button */
+function startGame() {
+  name1 = $("name1").value.trim() || "Player 1";
+  name2 = $("name2").value.trim() || "Player 2";
+
+  score1 = 0;
+  score2 = 0;
+  player1Turn = true;
+  verbPool = shuffle([...VERBS]);
+  currentVerb = null;
+
+  $("disp1").textContent = name1;
+  $("disp2").textContent = name2;
+
+  updateUI();
+  resetRound();
+  showScreen("game");
+}
+
+/** Reset the game card to its idle state (no verb drawn yet) */
+function resetRound() {
+  currentVerb = null;
+
+  $("verbDisplay").textContent = "—";
+
+  const fp = $("feedbackPanel");
+  fp.className = "feedback-panel hidden";
+  fp.innerHTML = "";
+
+  const inp = $("answerInput");
+  inp.value = "";
+  inp.disabled = true;
+  inp.className = "answer-input";
+
+  $("btnDraw").disabled = false;
+  $("btnSubmit").disabled = true;
+
+  $("counter").textContent =
+    verbPool.length + " verb" + (verbPool.length !== 1 ? "s" : "") + " remaining";
+}
+
+/** Draw a random verb from the pool */
+function drawVerb() {
+  if (verbPool.length === 0) {
+    verbPool = shuffle([...VERBS]); // refill when exhausted
+  }
+
+  currentVerb = verbPool.pop();
+
+  const vd = $("verbDisplay");
+  vd.textContent = currentVerb[0];
+  vd.classList.remove("flash");
+  void vd.offsetWidth; // force reflow to restart animation
+  vd.classList.add("flash");
+
+  const inp = $("answerInput");
+  inp.value = "";
+  inp.disabled = false;
+  inp.className = "answer-input";
+  inp.focus();
+
+  const fp = $("feedbackPanel");
+  fp.className = "feedback-panel hidden";
+  fp.innerHTML = "";
+
+  $("btnDraw").disabled = true;
+  $("btnSubmit").disabled = false;
+
+  $("counter").textContent =
+    verbPool.length + " verb" + (verbPool.length !== 1 ? "s" : "") + " remaining";
+}
+
+/** Evaluate the player's answer */
+function checkAnswer() {
+  if (!currentVerb) return;
+
+  const typed   = $("answerInput").value.trim().toLowerCase();
+  const correct = currentVerb[1].toLowerCase();
+  const isRight = typed === correct;
+
+  const inp = $("answerInput");
+  inp.disabled = true;
+  $("btnSubmit").disabled = true;
+
+  if (isRight) {
+    showCorrectFeedback(correct);
+    inp.className = "answer-input";
+    if (player1Turn) score1++;
+    else score2++;
+  } else {
+    inp.className = "answer-input shake";
+    showWrongFeedback(typed, correct);
+  }
+
+  updateUI();
+
+  // Check for a winner
+  if (score1 >= WIN_SCORE || score2 >= WIN_SCORE) {
+    setTimeout(showWinScreen, isRight ? 1400 : 15000);
+    return;
+  }
+
+  // Swap turns and prepare next round
+  player1Turn = !player1Turn;
+  updateUI();
+  setTimeout(resetRound, isRight ? 1000 : 17000);
+}
+
+/** Navigate to the win screen */
+function showWinScreen() {
+  const winner = score1 >= WIN_SCORE ? name1 : name2;
+
+  $("winnerName").textContent = winner;
+  $("winSub").textContent     = "wins the duel!";
+  $("ws1name").textContent    = name1;
+  $("ws2name").textContent    = name2;
+  $("ws1score").textContent   = score1;
+  $("ws2score").textContent   = score2;
+
+  showScreen("win");
+}
+
+/** Return to the setup screen */
+function goSetup() {
+  showScreen("setup");
+}
+
+/* ════════════════════════════════════════════════════════
+   UI UPDATES
+   ════════════════════════════════════════════════════════ */
+
+/** Sync all dynamic UI elements with current state */
+function updateUI() {
+  $("score1").textContent = score1;
+  $("score2").textContent = score2;
+
+  $("card1").className = "score-card" + (player1Turn ? " active" : "");
+  $("card2").className = "score-card" + (!player1Turn ? " active" : "");
+
+  $("turnBadge").textContent = "→ " + (player1Turn ? name1 : name2) + "'s turn";
+
+  $("bar1").style.width = (score1 / WIN_SCORE) * 100 + "%";
+  $("bar2").style.width = (score2 / WIN_SCORE) * 100 + "%";
+
+  buildPips("pips1", score1);
+  buildPips("pips2", score2);
+}
+
+/** Render the 10 pip dots for a score panel */
+function buildPips(containerId, score) {
+  const el = $(containerId);
+  el.innerHTML = "";
+  for (let i = 0; i < WIN_SCORE; i++) {
+    const dot = document.createElement("div");
+    dot.className = "pip" + (i < score ? " filled" : "");
+    el.appendChild(dot);
+  }
+}
+
+/* ════════════════════════════════════════════════════════
+   FEEDBACK PANEL BUILDERS
+   ════════════════════════════════════════════════════════ */
+
+/** Show the green "correct" feedback panel */
+function showCorrectFeedback(correct) {
+  const fp = $("feedbackPanel");
+  fp.innerHTML = `
+    <div class="fb-icon">✅</div>
+    <div class="fb-text">
+      Correct! The past participle of
+      <strong style="color:var(--sand)">${currentVerb[0]}</strong> is
+      <span class="fb-word">${correct}</span>
+    </div>`;
+  fp.className = "feedback-panel correct";
+}
+
+/**
+ * Show the red "wrong" feedback panel with a letter-by-letter diff
+ * comparing the typed answer against the correct one.
+ */
+function showWrongFeedback(typed, correct) {
+  const fp = $("feedbackPanel");
+  fp.className = "feedback-panel wrong";
+  fp.innerHTML = "";
+
+  // Header
+  const header = document.createElement("div");
+  header.className = "fb-wrong-header";
+  header.innerHTML = '<span class="fb-icon">❌</span><span>Incorrect — here\'s the comparison</span>';
+
+  // Comparison grid
+  const comp = document.createElement("div");
+  comp.className = "comparison";
+
+  const { yourRow, refRow } = buildLetterDiff(typed, correct);
+
+  // "Your answer" row
+  const yourComp = document.createElement("div");
+  yourComp.className = "comp-row";
+  const yourLabel = document.createElement("span");
+  yourLabel.className = "comp-label your";
+  yourLabel.textContent = "YOUR ANSWER";
+  yourComp.appendChild(yourLabel);
+  yourComp.appendChild(yourRow);
+
+  // Divider
+  const divider = document.createElement("div");
+  divider.className = "divider";
+
+  // "Correct" row
+  const refComp = document.createElement("div");
+  refComp.className = "comp-row";
+  const refLabel = document.createElement("span");
+  refLabel.className = "comp-label right";
+  refLabel.textContent = "CORRECT";
+  refComp.appendChild(refLabel);
+  refComp.appendChild(refRow);
+
+  comp.appendChild(yourComp);
+  comp.appendChild(divider);
+  comp.appendChild(refComp);
+
+  // Tip
+  const tip = document.createElement("div");
+  tip.className = "fb-tip";
+  tip.textContent = buildTip(typed, correct);
+
+  fp.appendChild(header);
+  fp.appendChild(comp);
+  fp.appendChild(tip);
+}
+
+/* ════════════════════════════════════════════════════════
+   DIFF HELPERS
+   ════════════════════════════════════════════════════════ */
+
+/**
+ * Build two letter-row elements comparing typed vs correct,
+ * coloring each letter by its correctness.
+ */
+function buildLetterDiff(typed, correct) {
+  const tArr   = typed.split("");
+  const cArr   = correct.split("");
+  const maxLen = Math.max(tArr.length, cArr.length);
+
+  const yourRow = document.createElement("div");
+  yourRow.className = "letter-row";
+
+  const refRow = document.createElement("div");
+  refRow.className = "letter-row";
+
+  for (let i = 0; i < maxLen; i++) {
+    const t = tArr[i];
+    const c = cArr[i];
+
+    if (t !== undefined && c !== undefined) {
+      // Both sides have a character at this position
+      if (t === c) {
+        yourRow.appendChild(makeLetterBox(t, "ok"));
+        refRow.appendChild(makeLetterBox(c, "ref-ok"));
+      } else {
+        yourRow.appendChild(makeLetterBox(t, "bad"));
+        refRow.appendChild(makeLetterBox(c, "ref-fix"));
+      }
+    } else if (t !== undefined) {
+      // Extra letter typed (answer is too long)
+      yourRow.appendChild(makeLetterBox(t, "bad"));
+      refRow.appendChild(makeLetterBox("_", "ref-fix"));
+    } else {
+      // Missing letter (answer is too short)
+      yourRow.appendChild(makeLetterBox("_", "miss"));
+      refRow.appendChild(makeLetterBox(c, "ref-fix"));
+    }
+  }
+
+  return { yourRow, refRow };
+}
+
+/** Create a single styled letter box element */
+function makeLetterBox(char, cssClass) {
+  const span = document.createElement("span");
+  span.className = "letter " + cssClass;
+  span.textContent = char;
+  return span;
+}
+
+/**
+ * Return a contextual tip based on the nature of the mistake:
+ * too long, too short, or same length with wrong letters.
+ */
+function buildTip(typed, correct) {
+  const diff = typed.length - correct.length;
+
+  if (diff > 0) {
+    return "💡 You typed " + diff + " extra letter" + (diff > 1 ? "s" : "") + ". Watch the length!";
+  }
+  if (diff < 0) {
+    const missing = Math.abs(diff);
+    return "💡 You missed " + missing + " letter" + (missing > 1 ? "s" : "") + ". This form is longer than you think.";
+  }
+
+  // Same length — count mismatched positions
+  const mismatches = typed.split("").filter((ch, i) => ch !== correct[i]).length;
+  if (mismatches === 1) {
+    return "💡 Just one letter off — you were very close!";
+  }
+  return "💡 Study the highlighted letters in red — those are where it went wrong.";
+}
+
+/* ════════════════════════════════════════════════════════
+   UTILITIES
+   ════════════════════════════════════════════════════════ */
+
+/** Fisher-Yates shuffle — returns a new shuffled array */
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+/* ── Keyboard shortcut: Enter submits ────────────────── */
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !$("btnSubmit").disabled) {
+    checkAnswer();
+  }
+});
+  </script>
+</body>
+</html>
