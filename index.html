@@ -901,14 +901,14 @@ function checkAnswer() {
 
   // Check for a winner
   if (score1 >= WIN_SCORE || score2 >= WIN_SCORE) {
-    setTimeout(showWinScreen, isRight ? 8000 : 12000);
+    setTimeout(showWinScreen, isRight ? 9000 : 10000);
     return;
   }
 
   // Swap turns and prepare next round
   player1Turn = !player1Turn;
   updateUI();
-  setTimeout(resetRound, isRight ? 6000 : 15000);
+  setTimeout(resetRound, isRight ? 8000 : 12000);
 }
 
 /** Navigate to the win screen */
